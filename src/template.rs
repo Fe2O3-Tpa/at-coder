@@ -1,8 +1,7 @@
 use std::io;
 
 fn main() {
-    let input = read_buffer_vec();
-    let n: usize = input[0].parse().unwrap();
+    let input = read_buffer();
 }
 
 fn read_buffer_vec() -> Vec<String> {
