@@ -5,7 +5,10 @@ fn main() {
     let n: usize = input[0].parse().unwrap();
     let m: usize = input[1].parse().unwrap();
 
-    let a_sequence: Vec<usize> = read_buffer_vec().iter().map(|s| s.parse().unwrap()).collect();
+    let a_sequence: Vec<usize> = read_buffer_vec()
+        .iter()
+        .map(|s| s.parse().unwrap())
+        .collect();
 
     let mut output: bool = false;
     for i in 0..n {
@@ -18,12 +21,14 @@ fn main() {
     }
     match output {
         true => println!("Yes"),
-        false => println!("No")
+        false => println!("No"),
     }
 }
 
 fn read_buffer_vec() -> Vec<String> {
     let mut buffer = String::new();
-    io::stdin().read_line(&mut buffer).expect("Failed to read line.");
+    io::stdin()
+        .read_line(&mut buffer)
+        .expect("Failed to read line.");
     buffer.trim().split(" ").map(|s| s.to_string()).collect()
 }
