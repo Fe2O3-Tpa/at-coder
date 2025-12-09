@@ -34,6 +34,22 @@ macro_rules! repeat_equal {
     };
 }
 
+macro_rules! repeat_equal_as {
+    ($var: ident, $start:expr, $end:expr, $body:block) => {
+        for $var in $start..=$end {
+            $body
+        }
+    };
+}
+
+fn yes() {
+    println!("Yes");
+}
+
+fn no() {
+    println!("No");
+}
+
 fn main() {
     
 }
