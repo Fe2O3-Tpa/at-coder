@@ -1,7 +1,7 @@
 use std::io;
 
 fn main() {
-    let input = read_buffer();
+
 }
 
 fn read_buffer_vec() -> Vec<String> {
