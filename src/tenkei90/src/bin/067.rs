@@ -49,11 +49,17 @@ fn base8_to_base10(base8_value: String) -> BigUint {
             eight_digits_i * (8_usize.pow((i - 1).try_into().unwrap())),
         );
     }
-    ten_digits.iter().sum::<BigUint>()
+    ten_digits.iter().map(|&t| t as BigUint).sum::<BigUint>()
 }
 
 fn base10_to_base9(base10: BigUint) -> String {
-    
+    let mut base10_clone = base10.clone();
+    let mut output = String::from("");
+    while base10_clone == 0 {
+        output = format!("{}{}", (base10_clone % 9).to_string(), output);
+        base10_clone /= 9;
+    }
+    output
 }
 
 fn main() {
@@ -63,8 +69,7 @@ fn main() {
     }
     let mut did_int = n;
     repeat!(0, k, {
-        println!("{:?}", ten_digits);
-        did_int = base8_to_base10(did_int);
-
+        did_int = base10_to_base9(base8_to_base10(did_int)).replace("8", "5");
     });
+    println!("{}", did_int);
 }
