@@ -1,23 +1,14 @@
 use proconio::input;
+use std::cmp::min;
 
 type Int = isize;
 type UInt = usize;
-type BigUint = u128;
 type Shosuu = f64;
-type VecInt = Vec<Int>;
-type VecUInt = Vec<UInt>;
-type VecString = Vec<String>;
-type TwoDim<T> = Vec<Vec<T>>;
 
-macro_rules! repeat {
-    ($start:expr, $end:expr, $body:block) => {
-        for _ in $start..$end {
-            $body
-        }
-    };
-}
+const INF_UINT: UInt = 1<<30;
+const INF_INT: Int = 1<<30;
 
-macro_rules! repeat_as {
+macro_rules! rep_as {
     ($var: ident, $start:expr, $end:expr, $body:block) => {
         for $var in $start..$end {
             $body
@@ -25,7 +16,15 @@ macro_rules! repeat_as {
     };
 }
 
-macro_rules! repeat_equal {
+macro_rules! rep_as_label {
+    ($var: ident, $start:expr, $end:expr, $body:block) => {
+        for $var in $start..$end {
+            $body
+        }
+    };
+}
+
+macro_rules! rep_equal {
     ($start:expr, $end:expr, $body:block) => {
         for i in $start..=$end {
             let _ = i;
@@ -34,12 +33,12 @@ macro_rules! repeat_equal {
     };
 }
 
-macro_rules! repeat_equal_as {
-    ($var: ident, $start:expr, $end:expr, $body:block) => {
-        for $var in $start..=$end {
+macro_rules! rep_times {
+    ($times: expr, $body: block) => {
+        for _ in 0..$times {
             $body
         }
-    };
+    }
 }
 
 fn yes() {
@@ -50,6 +49,13 @@ fn no() {
     println!("No");
 }
 
+#[allow(unused_doc_comments)]
 fn main() {
+    /**
+     * 抽象化
+     * 
+     * 必要・十分条件の整理
+     * 
+     */
     
 }
