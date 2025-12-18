@@ -49,6 +49,26 @@ fn string_nth(string: &String, place: UInt) -> char {
     (*string).chars().nth(place).unwrap()
 }
 
+fn revo_clock(current: (Int, Int)) -> (Int, Int) {
+    match current {
+        (0, 1) => (1, 0),
+        (1, 0) => (0, -1),
+        (0, -1) => (-1, 0),
+        (-1, 0) => (0, 1),
+        _ => (0, 0)
+    }
+}
+
+fn revo_rev_clock(current: (Int, Int)) -> (Int, Int) {
+    match current {
+        (0, 1) => (-1, 0),
+        (1, 0) => (0, 1),
+        (0, -1) => (1, 0),
+        (-1, 0) => (0, -1),
+        _ => (0, 0)
+    }
+}
+
 fn run_length(input: String) -> Vec<(char, UInt)> {
     let mut output: Vec<(char, UInt)> = Vec::new();
     rep_as!(i, 0, input.chars().count(), {

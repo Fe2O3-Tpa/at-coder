@@ -1,4 +1,3 @@
-use std::collections::HashSet;
 use proconio::input;
 
 type Int = isize;
@@ -26,33 +25,9 @@ macro_rules! rep_equal {
     };
 }
 
-macro_rules! rep_equal_as {
-    ($var: ident, $start:expr, $end:expr, $body:block) => {
-        for $var in $start..=$end {
-            $body
-        }
-    };
-}
-
 macro_rules! rep_times {
     ($times: expr, $body: block) => {
         for _ in 0..$times {
-            $body
-        }
-    };
-}
-
-macro_rules! rep_iter {
-    ($iter: expr, $body: block) => {
-        for _ in $iter {
-            $body
-        }
-    };
-}
-
-macro_rules! rep_iter_as {
-    ($var: ident, $iter: expr, $body: block) => {
-        for $var in $iter {
             $body
         }
     };
@@ -66,22 +41,35 @@ fn yes_no(input: &bool) {
     }
 }
 
+fn sharp_place(sharp_char: char) -> UInt {
+    match sharp_char {
+        'v' => 1,
+        'w' => 2,
+        _ => 0
+    }
+}
+
 #[allow(unused_doc_comments)]
 fn main() {
     /**
      * リンク
-     * 
-     * 
-     * 入力
-     * 
-     * 
-     * 抽象化や手順
-     * 
-     * 
+     * https://atcoder.jp/contests/abc306/tasks/abc306_a
+     *
+     * 抽象化
+     * for文を回して変数を足していく
+     *
      * 必要・十分条件の整理
+     * 正しく実装する
      */
-
     input! {
-        n: Int
+        s: String
     }
+    let s_chars = s.chars().collect::<Vec<char>>();
+    let mut output = 0;
+    
+    rep_as!(i, 0, s_chars.len(), {
+        output += sharp_place(s_chars[i]);
+    });
+
+    println!("{}", output);
 }

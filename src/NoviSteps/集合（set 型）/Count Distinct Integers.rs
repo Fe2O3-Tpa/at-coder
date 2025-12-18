@@ -42,22 +42,6 @@ macro_rules! rep_times {
     };
 }
 
-macro_rules! rep_iter {
-    ($iter: expr, $body: block) => {
-        for _ in $iter {
-            $body
-        }
-    };
-}
-
-macro_rules! rep_iter_as {
-    ($var: ident, $iter: expr, $body: block) => {
-        for $var in $iter {
-            $body
-        }
-    };
-}
-
 fn yes_no(input: &bool) {
     if *input {
         println!("Yes");
@@ -70,18 +54,27 @@ fn yes_no(input: &bool) {
 fn main() {
     /**
      * リンク
-     * 
+     * https://atcoder.jp/contests/abc240/tasks/abc240_b
      * 
      * 入力
+     * n: 1~1e3
+     * a_i: 1~10e9 かつ 要素数nの数列 (1 <= i <= n)
      * 
-     * 
-     * 抽象化や手順
-     * 
+     * 抽象化
+     * 集合型にぶち込んで個数を出力する
      * 
      * 必要・十分条件の整理
+     * 
      */
-
     input! {
-        n: Int
+        n: UInt,
+        a: [UInt; n]
     }
+
+    let mut set = HashSet::new();
+    rep_as!(i, 0, n, {
+        set.insert(a[i]);
+    });
+
+    println!("{}", set.len());
 }

@@ -1,5 +1,5 @@
-use std::collections::HashSet;
 use proconio::input;
+use std::cmp::max;
 
 type Int = isize;
 type UInt = usize;
@@ -26,33 +26,9 @@ macro_rules! rep_equal {
     };
 }
 
-macro_rules! rep_equal_as {
-    ($var: ident, $start:expr, $end:expr, $body:block) => {
-        for $var in $start..=$end {
-            $body
-        }
-    };
-}
-
 macro_rules! rep_times {
     ($times: expr, $body: block) => {
         for _ in 0..$times {
-            $body
-        }
-    };
-}
-
-macro_rules! rep_iter {
-    ($iter: expr, $body: block) => {
-        for _ in $iter {
-            $body
-        }
-    };
-}
-
-macro_rules! rep_iter_as {
-    ($var: ident, $iter: expr, $body: block) => {
-        for $var in $iter {
             $body
         }
     };
@@ -66,22 +42,44 @@ fn yes_no(input: &bool) {
     }
 }
 
+fn sharp_place(sharp_char: char) -> UInt {
+    match sharp_char {
+        'v' => 1,
+        'w' => 2,
+        _ => 0
+    }
+}
+
 #[allow(unused_doc_comments)]
 fn main() {
     /**
      * リンク
-     * 
-     * 
-     * 入力
-     * 
-     * 
-     * 抽象化や手順
-     * 
+     * https://atcoder.jp/contests/abc184/tasks/abc184_b
+     *
+     * 抽象化
+     * 変数(Int)を用意して、Xを代入する。
+     * for文で入力をVec<char>で回す
+     * maxを代入して変数を変える
      * 
      * 必要・十分条件の整理
+     * 正しく実装する
      */
-
     input! {
-        n: Int
+        n: UInt,
+        x: Int,
+        s: String
     }
+
+    let mut point = x;
+    let quizzes = s.chars().collect::<Vec<char>>();
+
+    rep_as!(i, 0, n, {
+        if quizzes[i] == 'o' {
+            point += 1;
+        } else {
+            point = max(0, point - 1);
+        }
+    });
+
+    println!("{}", point);
 }

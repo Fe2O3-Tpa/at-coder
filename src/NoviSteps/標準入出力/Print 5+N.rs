@@ -1,4 +1,3 @@
-use std::collections::HashSet;
 use proconio::input;
 
 type Int = isize;
@@ -7,7 +6,12 @@ type Shosuu = f64;
 
 const INF_UINT: UInt = 1 << 30;
 const INF_INT: Int = 1 << 30;
-const DIR4: [(Int, Int); 4] = [(-1, 0), (1, 0), (0, -1), (0, 1)];
+const DIR4: [(Int, Int); 4] = [
+    (-1, 0),
+    ( 1, 0),
+    ( 0,-1),
+    ( 0, 1),
+];
 
 macro_rules! rep_as {
     ($var: ident, $start:expr, $end:expr, $body:block) => {
@@ -26,14 +30,6 @@ macro_rules! rep_equal {
     };
 }
 
-macro_rules! rep_equal_as {
-    ($var: ident, $start:expr, $end:expr, $body:block) => {
-        for $var in $start..=$end {
-            $body
-        }
-    };
-}
-
 macro_rules! rep_times {
     ($times: expr, $body: block) => {
         for _ in 0..$times {
@@ -42,46 +38,28 @@ macro_rules! rep_times {
     };
 }
 
-macro_rules! rep_iter {
-    ($iter: expr, $body: block) => {
-        for _ in $iter {
-            $body
-        }
-    };
+fn yes() {
+    println!("Yes");
 }
 
-macro_rules! rep_iter_as {
-    ($var: ident, $iter: expr, $body: block) => {
-        for $var in $iter {
-            $body
-        }
-    };
-}
-
-fn yes_no(input: &bool) {
-    if *input {
-        println!("Yes");
-    } else {
-        println!("No")
-    }
+fn no() {
+    println!("No");
 }
 
 #[allow(unused_doc_comments)]
 fn main() {
     /**
      * リンク
+     * https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_a
      * 
-     * 
-     * 入力
-     * 
-     * 
-     * 抽象化や手順
-     * 
+     * 抽象化
+     * 実 装 問 題
      * 
      * 必要・十分条件の整理
+     * 5+Nを出力する
      */
-
     input! {
-        n: Int
+        n: UInt
     }
+    println!("{}", 5 + n);
 }

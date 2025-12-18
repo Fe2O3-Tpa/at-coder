@@ -1,4 +1,5 @@
 use std::collections::HashSet;
+use itertools::Itertools;
 use proconio::input;
 
 type Int = isize;
@@ -42,22 +43,6 @@ macro_rules! rep_times {
     };
 }
 
-macro_rules! rep_iter {
-    ($iter: expr, $body: block) => {
-        for _ in $iter {
-            $body
-        }
-    };
-}
-
-macro_rules! rep_iter_as {
-    ($var: ident, $iter: expr, $body: block) => {
-        for $var in $iter {
-            $body
-        }
-    };
-}
-
 fn yes_no(input: &bool) {
     if *input {
         println!("Yes");
@@ -70,18 +55,36 @@ fn yes_no(input: &bool) {
 fn main() {
     /**
      * リンク
-     * 
+     * https://atcoder.jp/contests/abc408/tasks/abc408_b
      * 
      * 入力
+     * n: 1~100
+     * A: A_i(1 <= i <= n)が1~100 かつ 要素数nの正整数列
      * 
-     * 
-     * 抽象化や手順
-     * 
+     * 抽象化
+     * HashSetにぶち込む
+     * Vecにして昇順ソート
+     * 「Vecのlen」と「ソートしたVecを空白区切りしたString」を改行区切りで出力
      * 
      * 必要・十分条件の整理
+     * 
      */
-
     input! {
-        n: Int
+        n: UInt,
+        a: [UInt; n]
     }
+    let mut set = HashSet::new();
+
+    rep_as!(i, 0, n, {
+        set.insert(a[i]);
+    });
+
+    let mut usize_vec = set.iter().map(|t| (*t).clone()).collect::<Vec<UInt>>();
+    // 昇順ソート
+    usize_vec.sort();
+
+    let string_vec = usize_vec.iter().map(|t| t.to_string()).collect_vec();
+
+    println!("{}", string_vec.len());
+    println!("{}", string_vec.join(" "))
 }

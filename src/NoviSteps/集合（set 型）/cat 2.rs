@@ -1,4 +1,5 @@
 use std::collections::HashSet;
+use itertools::Itertools;
 use proconio::input;
 
 type Int = isize;
@@ -42,22 +43,6 @@ macro_rules! rep_times {
     };
 }
 
-macro_rules! rep_iter {
-    ($iter: expr, $body: block) => {
-        for _ in $iter {
-            $body
-        }
-    };
-}
-
-macro_rules! rep_iter_as {
-    ($var: ident, $iter: expr, $body: block) => {
-        for $var in $iter {
-            $body
-        }
-    };
-}
-
 fn yes_no(input: &bool) {
     if *input {
         println!("Yes");
@@ -70,18 +55,33 @@ fn yes_no(input: &bool) {
 fn main() {
     /**
      * リンク
-     * 
+     * https://atcoder.jp/contests/abc413/tasks/abc413_b
      * 
      * 入力
+     * n: 2~100
+     * s: 英小文字の文字列 かつ 長さが1~10
      * 
-     * 
-     * 抽象化や手順
-     * 
+     * 抽象化
+     * i,jをnで2重ループし、S_iとS_jを連結した文字列をHashSetにぶち込む
+     * (ただし、iとjは相異なる。つまりif i != jで実行)
      * 
      * 必要・十分条件の整理
+     * 問題文通り実装する。
      */
-
     input! {
-        n: Int
+        n: UInt,
+        s: [String; n]
     }
+
+    let mut set = HashSet::new();
+    rep_as!(i, 0, n, {
+        rep_as!(j, 0, n, {
+            if i != j {
+                let s_comb = format!("{}{}", s[i], s[j]);
+                set.insert(s_comb);
+            }
+        });
+    });
+
+    println!("{}", set.len());
 }
